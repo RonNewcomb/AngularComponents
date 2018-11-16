@@ -115,5 +115,41 @@ A simple progress bar using two divs and an animation.
 
 ## &lt;shared-calendar&gt;
 
+For our calendar needs we originally used FullCalendar, a js library with an Angular wrapper.  But much as with the D3 library's pie chart, we encountered performance problems with hundreds of items on the calendar.  We also didn't required a lot of FullCalendar's other functionality, such as events that stretch over multiple days.
+
+So I wrote a new calendar component from scratch.  The `ng-template` between the opening and closing `<shared-calendar>` tags is the code how each event should be displayed. 
+
+```html
+    <shared-calendar [items]="data"
+                     [count]="data.length" 
+                     [filter]="filter"
+                     (datesChanged)="datesChanged($event)" 
+                     (itemClick)="itemClick($event)"
+                     (dayClick)="dayClick($event)"
+                     (moreClick)="moreClick($event)"
+                     (dropExisting)="dropExisting($event)"
+                     (dropNew)="dropNew($event)">
+
+        <ng-template let-act>
+            <a class="lineitem">
+                <div class="linecontent">
+                    <div [class.completed]="act.completionDate">
+                        <i class="{{act.icon}}"></i> 
+                        {{act.title}}
+                        <ng-container *ngIf="act.completionDate">
+                            <span class="linebadge" [style.background-color]="act.color"><i class="fa fa-check"></i></span>
+                        </ng-container>
+                        <ng-container *ngIf="!act.completionDate">
+                            <span *ngIf="act.priority==1" class="linebadge"><i class="fa fa-arrow-up"></i></span>
+                            <span *ngIf="act.priority==3" class="linebadge"><i class="fa fa-arrow-down"></i></span>
+                        </ng-container>
+                    </div>
+                </div>
+            </a>
+        </ng-template>
+      
+    </shared-calendar>
+```
+
 ## &lt;tree-view-menu&gt;
 
