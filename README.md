@@ -37,3 +37,40 @@ This trivial component just wraps form validation error messages.  It makes clie
 ```html
     <err *ngIf="f.submitted && f.invalid">Bad dog!</err>
 ```
+
+## FormBuilder2
+
+This is a strongly-typed interface lain over Angular's FormBuilder.  Related Stack Overflow question: https://stackoverflow.com/questions/44461636/fixed-length-array-with-optional-items-in-typescript-interface 
+
+## &lt;flex-row&gt;
+
+This is a CSS flexbox, in the horizontal "row" direction, as an Angular component.  Flexbox is such a major layout tool that I don't like to hunt for it among all the `div` and `class` verbiage in a lines like `<div class="mt p0 fbr"><div class="ko er">...` and taking a trip to the CSS file to see what's going on. 
+
+The attribute `nowrap="x.x.x"` sets both the `flex-flow` and `justify-content` properties at once, and the `x.x.x` is a visual representation of `space-between`, like how `.xxx.` represents `center` and `..xxx` represents `flex-end`.
+
+It is row-only because IE doesn't support flex-box columns properly, and a stack of divs largely does that job already fairly straightforwardly.
+
+```html
+<flex-row nowrap="x.x.x">
+    <div class="form-group">
+        blah blah blah
+    </div>
+
+    <div class="form-group">
+        blah blah blah
+    </div>
+</flex-row>
+```
+
+## &lt;flex&gt;
+
+## &lt;multi-picker&gt;
+
+## &lt;pie&gt;
+
+## &lt;progress-bar&gt;
+
+## &lt;shared-calendar&gt;
+
+## &lt;tree-view-menu&gt;
+
