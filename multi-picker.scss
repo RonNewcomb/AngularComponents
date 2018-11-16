@@ -1,0 +1,40 @@
+
+.dropdown .show {
+    transform: scale(1);
+}
+
+.imitate-checkbox * {
+  cursor: pointer;
+}
+
+.imitate-checkbox span:before {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  right: 0;
+  bottom: 0;
+  text-align: center !important;
+  font-size: 12px;
+  line-height: 19px;
+  vertical-align: middle;
+}
+
+.imitate-checkbox span {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.imitate-checkbox span .checked {
+  border-color: #2095f2;
+  background-color: #2095f2;
+  color: #fff;
+}
+

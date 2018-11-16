@@ -1,0 +1,114 @@
+@import '../../../../styles/app/reset/bootstrap-variables';
+@import '../../../app.theme.scss';
+
+$sc-toolbar-height: 30px;
+$sc-toolbar-mb: 1em;
+
+.sc {
+    font-size: 1em;
+    width: 100%;
+    height: 100%;
+    padding:theme(padding,0.33);
+}
+
+.sc-toolbar {
+    text-align: center;
+    margin-bottom: $sc-toolbar-mb;
+    height: $sc-toolbar-height;
+}
+
+.sc-toolbar h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.sc-toolbar > * > :first-child {
+    margin-left: 0;
+}
+
+.sc-toolbar > * > * {
+    float: left;
+    margin-left: .75em;
+}
+
+.sc-center {
+    display: inline-block;
+}
+
+.sc-clear {
+    clear: both;
+}
+
+.sc-table {
+    width: 100%;
+    height: calc(100% - #{$sc-toolbar-height} - #{$sc-toolbar-mb});
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    font-size: 1em;
+    background:white;
+}
+
+.sc-table tbody {
+    border: 1px solid #ddd;
+}
+
+.sc-day-header {
+    border: 1px solid #ddd;
+    padding: 0;
+    vertical-align: top;
+    text-align: center;
+}
+
+.each-day {
+    position: relative;
+    overflow: hidden;
+    width: 14.285714285714285714285714285714%; // == 100% / 7
+}
+
+.each-day:hover {
+    background-color: #f4f5f5 !important;
+    cursor: pointer;
+}
+
+.clip-user-content {
+    position: absolute;
+    width: 100%;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 0;
+    vertical-align: top;
+}
+
+.nth-day-of-month {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: lightgrey;//$dropdown-header-color;
+    margin-bottom: -5px;
+}
+
+.sc-today {
+    background: $state-warning-bg !important;
+}
+
+.plus-x-more {
+    bottom: 0;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    z-index: 2;
+    opacity: 0.9;
+}
+
+.plus-x-more-label {
+    margin: 1px 3px;
+    font-size: .85em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sc-more:hover {
+    text-decoration: underline;
+}

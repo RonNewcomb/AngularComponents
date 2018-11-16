@@ -1,0 +1,29 @@
+<div class="btn-group" ngbDropdown auto-close="outsideClick" style="width:100%">
+    <button id="btn-append-to-body" type="button" class="btn btn-default form-control" ngbDropdownToggle>
+        {{selectedLabel}}
+    </button>
+    <ul class="dropdown-menu input-md multi-select-list" role="menu" ngbDropdownMenu aria-labelledby="btn-append-to-body" *ngIf="options && model">
+        <li class="col-sm-12 bb pl-4 m">
+            <div class="needsclick text-left p-0 col-sm-5 btn btn-link text-muted" (click)="toggleAll($event)">
+                <div class="imitate-checkbox">
+                    <span><span [hidden]="model.length !== options.length" class="fa fa-check checked"></span></span>
+                    All
+                </div>
+            </div>
+            <div class="needsclick text-left p-0 col-sm-5 btn btn-link text-muted" (click)="toggleNone($event)">
+                <div class="imitate-checkbox">
+                    <span><span [hidden]="model.length !== 0" class="fa fa-check checked"></span></span>
+                    None
+                </div>
+            </div>
+        </li>
+        <li class="col-sm-12 dropdown-item" *ngFor="let option of options" (click)="handleSelection(option, $event)">
+            <div class="needsclick clickable col-12 text-left m text-muted">
+                <div class="imitate-checkbox">
+                    <span><span [hidden]="!option.selected" class="fa fa-check checked"></span></span>
+                    {{option.key}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

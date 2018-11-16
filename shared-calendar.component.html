@@ -1,0 +1,64 @@
+<div class="sc">
+    <div class="sc-toolbar">
+        <div class="pull-left">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" (click)="changeView(28)">month</button>
+                <button type="button" class="btn btn-default btn-sm" (click)="changeView(7)">week</button>
+                <button type="button" class="btn btn-default btn-sm" (click)="changeView(1)">day</button>
+            </div>
+        </div>
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" (click)="navToPrev()"><i class="fa fa-chevron-left"></i></button>
+                <button type="button" class="btn btn-default btn-sm" (click)="navToNext()"><i class="fa fa-chevron-right"></i></button>
+            </div>
+            <button type="button" class="btn btn-default btn-sm" (click)="navToToday()">today</button>
+        </div>
+        <div class="sc-center"><h2><span>{{intervalStart.format('LL')}}</span><span *ngIf="numDaysToShow !== 1"> &#8212; {{intervalEnd.format('LL')}}</span></h2></div>
+        <div class="sc-clear"></div>
+    </div>
+
+    <table class="sc-table">
+        <thead>
+            <tr>
+                <th *ngFor="let d of days" class="sc-day-header">{{d}}</th>
+            </tr>
+        </thead>
+        <!-- for each week -->
+        <tr *ngFor="let week of weeks; let $weekIndex = index;">
+            <!-- for each day -->
+            <ng-container *ngFor="let day of days; let $dayIndex = index;">
+
+                <!-- set variable dayOfEpoch -->
+                <ng-container *ngIf="(viewStart + ($weekIndex * 7) + $dayIndex) as dayOfEpoch">
+                    <!-- set variable eventInfo -->
+                    <ng-container *ngIf="(events[dayOfEpoch] || {}) as eventInfo">
+
+                        <!-- each day -->
+                        <td class="each-day" dnd-droppable (onDropSuccess)="onDropSuccess($event, dayOfEpoch)" (click)="onDayClick(dayOfEpoch)" [class.sc-today]="dayOfEpoch === todayCSS" [style.height.%]="100 / weeks.length">
+                            <div class="clip-user-content">
+
+                                <!-- nth day of month -->
+                                <div class="nth-day-of-month">
+                                    {{dayOfMonth[dayOfEpoch]}}&nbsp;
+                                </div>
+
+                                <!-- label for each item, using user-supplied template -->
+                                <div *ngFor="let eachItem of eventInfo.items" dnd-draggable [dragData]="[eachItem.id, dayOfEpoch]" (click)="onItemClick($event, eachItem)">
+                                    <ng-template [ngTemplateOutlet]="itemLabelTemplate" [ngTemplateOutletContext]="{$implicit: eachItem}"></ng-template>
+                                </div>
+
+                            </div> <!-- this div clipped the user-supplied content to the table cell -->
+
+                            <!-- + X more -->
+                            <div *ngIf="eventInfo.numMoreItems" (click)="onMoreClick($event, dayOfEpoch)" class="plus-x-more" [class.sc-today]="dayOfEpoch === todayCSS">
+                                <a class="plus-x-more-label">+{{eventInfo.numMoreItems}} more</a>
+                            </div>
+                        </td>
+
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </tr>
+    </table>
+</div>
