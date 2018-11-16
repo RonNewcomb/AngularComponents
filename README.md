@@ -80,9 +80,38 @@ A directive, related to the above, that sets the `flex` property on the children
 
 ## &lt;multi-picker&gt;
 
+A dropdown which has a checkbox next to each item in the dropdown. 
+
+```html
+    <multi-picker name="States" [model]="model.states" (modelChange)="model.states = $event;" [data]="states" placeholder="Choose states..."></multi-picker>
+```
+
 ## &lt;pie&gt;
 
+Although the D3 library's pie charts are very pretty, they also take about two full minutes to render a pie chart with 4,000 slices, one for each county in the United States, and it then looks horrible.  This is because D3 draws each pie slice separately as two lines from the center with an arc, and does a .fill to fill it in. Each slice has it's own mouse event handler. 
+
+This pie chart uses the dash-stroke and dash-array method of drawing the pie shown at https://www.smashingmagazine.com/2015/07/designing-simple-pie-charts-with-css/ , and uses one event handler for the whole thing, using some trig to figure out which slice was clicked.
+
+This isn't standalone because of the legend, but the core of the idea is here.
+
+```html
+    <pie *ngSwitchCase="'pie'"
+                     style="width:100%;height:100%;"
+                     (drilldown)="drilldown($event, $index, chart.chartType)"
+                     [chartDivElementId]="chart.id"
+                     [data]="chart.data"
+                     [selectedYFields]="chart.selectedYFields"
+                     [yFields]="selectedTopic.aggregateFields"></pie>
+```
+
+
 ## &lt;progress-bar&gt;
+
+A simple progress bar using two divs and an animation.
+
+```html
+   <progress-bar [amount]='value' [max]='total'></progress-bar>
+```
 
 ## &lt;shared-calendar&gt;
 
