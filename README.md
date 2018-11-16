@@ -3,7 +3,7 @@ Some non-trivial components for Angular I made and found useful.  Some of them I
 
 ## &lt;css-grid&gt;
   
-  Made because IE11's implementation of CSS grid is very different than modern broswers'.  If you want to use Angular variables to change which cell some content is in, it's actually non-trivial if you wish to support IE.  This component only supports what features of CSS Grid that IE supports and hides the details from the client code. 
+  Made because IE11's implementation of CSS grid is very different than modern browsers'.  If you want to use Angular variables to change which cell some content is in, it's actually non-trivial if you wish to support IE.  This component only supports what features of CSS Grid that IE supports and hides the details from the client code. 
   
   ```html
       <css-grid grid-template="1fr auto auto auto / {{phase >= phases.Completing ? '3fr 2fr 2fr' : '3fr 3fr 1fr'}}" column-gap="{{phase >= phases.Completing ? '25px' : '50px'}}" row-gap="0px">
@@ -95,13 +95,11 @@ This pie chart uses the dash-stroke and dash-array method of drawing the pie sho
 This isn't standalone because of the legend, but the core of the idea is here.
 
 ```html
-    <pie *ngSwitchCase="'pie'"
-                     style="width:100%;height:100%;"
-                     (drilldown)="drilldown($event, $index, chart.chartType)"
-                     [chartDivElementId]="chart.id"
-                     [data]="chart.data"
-                     [selectedYFields]="chart.selectedYFields"
-                     [yFields]="selectedTopic.aggregateFields"></pie>
+    <pie (drilldown)="drilldown($event, $index, chart.chartType)"
+         [chartDivElementId]="chart.id"
+         [data]="chart.data"
+         [selectedYFields]="chart.selectedYFields"
+         [yFields]="selectedTopic.aggregateFields"></pie>
 ```
 
 
@@ -115,7 +113,7 @@ A simple progress bar using two divs and an animation.
 
 ## &lt;shared-calendar&gt;
 
-For our calendar needs we originally used FullCalendar, a js library with an Angular wrapper.  But much as with the D3 library's pie chart, we encountered performance problems with hundreds of items on the calendar.  We also didn't required a lot of FullCalendar's other functionality, such as events that stretch over multiple days.
+For our calendar needs we originally used FullCalendar, a js library with an Angular wrapper.  But much as with the D3 library's pie chart, we encountered performance problems with hundreds of items on the calendar.  We also didn't require much of FullCalendar's other functionality, such as events that stretch over multiple days.
 
 So I wrote a new calendar component from scratch.  The `ng-template` between the opening and closing `<shared-calendar>` tags is the code how each event should be displayed. 
 
@@ -152,4 +150,21 @@ So I wrote a new calendar component from scratch.  The `ng-template` between the
 ```
 
 ## &lt;tree-view-menu&gt;
+
+An expandable/collapsable heirarchy view, much like file explorers show your folders in a left-hand panel.  Leaf nodes are assumed selectable, and mid-level nodes can be selectable or not depending on input.
+
+```html
+        <form (ngSubmit)="next()">
+
+            <tree-view-menu [models]="workgroups"
+                             idProperty="orgUnitId"
+                             parentIdProperty="parentOrgUnitId"
+                             [labelProperties]="'orgUnitName'"
+                             selectableProperty="workgroupId"
+                             (select)="onWorkgroupSelect($event)"
+                             [showFilter]="true">
+            </tree-view-menu>
+          
+        </form>
+```
 
