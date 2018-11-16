@@ -20,7 +20,13 @@ Some non-trivial components for Angular I made and found useful.  Some of them I
             blah blah blah...
         </div>
 
-        <err grid-area="4/1/4/4" place-self="right" *ngIf="f.submitted && f.invalid">Validation errors occured. Please check all fields and try again.</err>
+        <div [grid-area]="f.controls.CreateList?.value ? '2/1/2/5' : '1/1/1/5'">
+            blah blah blah...
+        </div>
+
+        <err grid-area="4/1/4/4" place-self="right" *ngIf="f.submitted && f.invalid">
+            Validation errors occured. Please check all fields and try again.
+        </err>
     </css-grid>
     ```
     
