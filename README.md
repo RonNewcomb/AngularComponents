@@ -62,7 +62,21 @@ It is row-only because IE doesn't support flex-box columns properly, and a stack
 </flex-row>
 ```
 
-## &lt;flex&gt;
+## [flex]
+
+A directive, related to the above, that sets the `flex` property on the children of a `flex-row`.  It accepts `top` and `bottom` as synonyms for `flex-start` and `flex-end` because it's more intuitive.
+
+```html
+<flex-row wrap=".xxx.">
+    <div flex='stretch'>
+        blah blah blah
+    </div>
+
+    <div [flex]='ctrl.model.position'>
+        blah blah blah
+    </div>
+</flex-row>
+```
 
 ## &lt;multi-picker&gt;
 
